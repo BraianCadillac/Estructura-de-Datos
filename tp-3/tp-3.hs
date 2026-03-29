@@ -2,9 +2,9 @@
 
 
 data Color = Azul | Rojo
-    deriving (Eq, Show)
+    deriving Show
 data Celda = Bolita Color Celda | CeldaVacia
-    deriving (Eq, Show)
+    deriving Show
 
 
 {-
@@ -20,11 +20,9 @@ Dados un elemento e y una lista xs cuenta la cantidad de apariciones de e en xs.
 
 celdaConBolitas = Bolita Rojo (Bolita Azul (Bolita Rojo (Bolita Azul CeldaVacia)))
 
-apariciones :: Eq a => a -> [a] -> Int
-apariciones a []     = 0
-apariciones a (x:xs) = if (a==x) 
-                        then 1 + apariciones a xs
-                        else apariciones a xs
+apariciones :: Color -> [Color] -> Int
+apariciones c []     = 0
+apariciones c (x:xs) = unoSi (esMismoColor c x) + apariciones c xs
 
 
 nroBolitas :: Color -> Celda -> Int
@@ -310,7 +308,7 @@ un nivel de dicho árbol.
 
 listPerLevel :: Tree a -> [[a]]
 listPerLevel EmptyT          = []
-listPerLevel (NodeT x ti td) = [[x]] ++ juntarNiveles(listPerLevel ti)  (listPerLevel td)
+listPerLevel (NodeT x ti td) = [x] : juntarNiveles (listPerLevel ti)  (listPerLevel td)
 
 juntarNiveles :: [[a]] -> [[a]] -> [[a]]
 juntarNiveles [] yss            = yss
