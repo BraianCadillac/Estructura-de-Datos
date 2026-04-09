@@ -180,8 +180,9 @@ n y 1 (incluidos). Si el número es inferior a 1, devuelve la lista vacía.
 -}
 
 cuentaRegresiva :: Int -> [Int]
-cuentaRegresiva 0 = []
-cuentaRegresiva n = n : cuentaRegresiva (n-1)
+cuentaRegresiva n = if (n < 1)
+                    then []
+                    else n : cuentaRegresiva (n-1)
 
 {-
 3. repetir :: Int -> a -> [a]
