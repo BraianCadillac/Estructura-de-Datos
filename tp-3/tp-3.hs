@@ -44,7 +44,7 @@ Dado un color y una celda, agrega una bolita de dicho color a la celda.
 
 poner :: Color -> Celda -> Celda
 poner co CeldaVacia    = Bolita co CeldaVacia
-poner co (Bolita c cl) = Bolita c (poner co cl)
+poner co (Bolita c cl) = Bolita co (poner c cl)
 
 {-
 sacar :: Color -> Celda -> Celda
@@ -135,15 +135,18 @@ Indica si hay al menos "n" tesoros en el camino.
 -}
 
 alMenosNTesoros :: Int -> Camino -> Bool
-alMenosNTesoros 0 Fin          = True
-alMenosNTesoros n Fin          = False
-alMenosNTesoros 0 (Cofre os c) = True
-alMenosNTesoros n (Cofre os c) = if (hayTesoroEn' os) 
-                                    then alMenosNTesoros (n-1) c
-                                    else alMenosNTesoros n c
-alMenosNTesoros 0 (Nada c)     = True
-alMenosNTesoros n (Nada c)     = alMenosNTesoros n c
+alMenosNTesoros n c = n >= cantidadDeTesorosEn c
 
+
+
+cantidadDeTesorosEn :: Camino -> Int
+cantidadDeTesorosEn Fin          = 0
+cantidadDeTesorosEn (Cofre os c) = cantidadDeTesoros os + cantidadDeTesorosEn c
+cantidadDeTesorosEn (Nada c)     = cantidadDeTesorosEn c
+
+cantidadDeTesoros :: [Objeto] -> Int
+cantidadDeTesoros []     = 0
+cantidadDeTesoros (o:os) = unoSi (esTesoro o) + cantidadDeTesoros os
 
 {-
 (desafío) cantTesorosEntre :: Int -> Int -> Camino -> Int
