@@ -440,7 +440,7 @@ losDevSenior (ConsEmpresa rs) ps = devSeniors rs ps
 
 devSeniors :: [Rol] -> [Proyecto] -> Int
 devSeniors [] ps     = 0
-devSeniors (r:rs) ps = unoSiEsDevYPertenece (esDevSenior r && seEncuentraEn (proyectoDe r) ps) + devSeniors rs ps
+devSeniors (r:rs) ps = unoSi (esDevSenior r && seEncuentraEn (proyectoDe r) ps) + devSeniors rs ps
 
 
 
@@ -457,9 +457,6 @@ seEncuentraEn p []      = False
 seEncuentraEn p (p':ps) = nombreProyecto p == nombreProyecto p' || seEncuentraEn p ps
 
 
-unoSiEsDevYPertenece :: Bool -> Int
-unoSiEsDevYPertenece True  = 1
-unoSiEsDevYPertenece False = 0
 
 {-
 asignadosPorProyecto :: Empresa -> [(Proyecto, Int)]
