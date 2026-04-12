@@ -20,22 +20,26 @@ Dados un elemento e y una lista xs cuenta la cantidad de apariciones de e en xs.
 
 celdaConBolitas = Bolita Rojo (Bolita Azul (Bolita Rojo (Bolita Azul CeldaVacia)))
 
-apariciones :: Color -> [Color] -> Int
-apariciones c []     = 0
-apariciones c (x:xs) = unoSi (esMismoColor c x) + apariciones c xs
-
-
 nroBolitas :: Color -> Celda -> Int
 nroBolitas c cl = apariciones c (bolitasDe cl)
-
 
 bolitasDe :: Celda -> [Color]
 bolitasDe CeldaVacia    = []
 bolitasDe (Bolita c cl) = c : bolitasDe cl
 
+esMismoColor :: Color -> Color -> Bool
+esMismoColor Azul Azul = True
+esMismoColor Rojo Rojo = True
+esMismoColor _ _       = False
+
+unoSi :: Bool -> Int
+unoSi True  = 1
+unoSi False = 0
 
 
-
+apariciones :: Color -> [Color] -> Int
+apariciones c []     = 0
+apariciones c (x:xs) = unoSi (esMismoColor c x) + apariciones c xs
 
 {-
 poner :: Color -> Celda -> Celda
@@ -44,7 +48,7 @@ Dado un color y una celda, agrega una bolita de dicho color a la celda.
 
 poner :: Color -> Celda -> Celda
 poner co CeldaVacia    = Bolita co CeldaVacia
-poner co (Bolita c cl) = Bolita co (poner c cl)
+poner co (Bolita c cl) = Bolita co (Bolita c cl)
 
 {-
 sacar :: Color -> Celda -> Celda
@@ -59,11 +63,6 @@ sacar co (Bolita c cl) = if (esMismoColor co c)
                             else Bolita c (sacar co cl)
 
 
-esMismoColor :: Color -> Color -> Bool
-esMismoColor Azul Azul = True
-esMismoColor Rojo Rojo = True
-esMismoColor _ _       = False
-
 
 {-
 ponerN :: Int -> Color -> Celda -> Celda
@@ -72,7 +71,7 @@ Dado un número n, un color c, y una celda, agrega n bolitas de color c a la cel
 
 ponerN :: Int -> Color -> Celda -> Celda
 ponerN 0 c cl = cl
-ponerN n c cl = poner c (ponerN (n-1) c cl)
+ponerN n c cl = Bolita c (ponerN (n-1) c cl)
 
 
 {-
@@ -135,7 +134,7 @@ Indica si hay al menos "n" tesoros en el camino.
 -}
 
 alMenosNTesoros :: Int -> Camino -> Bool
-alMenosNTesoros n c = n >= cantidadDeTesorosEn c
+alMenosNTesoros n c = n <= cantidadDeTesorosEn c
 
 
 
@@ -176,9 +175,6 @@ cantTesoros :: [Objeto] -> Int
 cantTesoros []     = 0
 cantTesoros (o:os) = unoSi (esTesoro o) + cantTesoros os
 
-unoSi :: Bool -> Int
-unoSi True  = 1
-unoSi False = 0
 
 {-
 2. Tipos arbóreos

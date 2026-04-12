@@ -34,6 +34,7 @@ implementaciones estamos obligados a escribir así los tipos.
 -}
 
 data Set a = S [a] Int
+    deriving Show
     {-
     INV REPR: siendo (S xs n)
         *n es igual a la longitud de xs
@@ -76,7 +77,7 @@ unionS (S xs n) (S ys m) =
     let l = (unirListas xs ys) in
         S l (length l) -- O(n² + n) = siendo n la longitud de la lista, n es absorvido por lo tanto queda = O(n²)
 
-unirListas :: [a] -> [a] -> [a] --O(n²) porque por cada elemento de xs hago una operación O(n) de la longitud de ys
+unirListas :: Eq a => [a] -> [a] -> [a] --O(n²) porque por cada elemento de xs hago una operación O(n) de la longitud de ys
 unirListas [] ys     = ys
 unirListas (x:xs) ys = if (elem x ys) -- O(n) siendo n la longitud de ys. En el peor caso x puede estar al final
                         then unirListas xs ys

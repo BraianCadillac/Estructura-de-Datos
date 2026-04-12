@@ -468,7 +468,7 @@ cantidad de personas involucradas.
 -}
 
 asignadosPorProyecto :: Empresa -> [(Proyecto, Int)]
-asignadosPorProyecto e = asignadosPorProyectoDe (sinRepetidos(proyectos e)) (empleados e)
+asignadosPorProyecto e = asignadosPorProyectoDe (proyectos e) (empleados e)
 
 empleados :: Empresa -> [Rol]
 empleados (ConsEmpresa rs) = rs
