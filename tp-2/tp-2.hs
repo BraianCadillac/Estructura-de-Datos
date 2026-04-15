@@ -97,19 +97,18 @@ reversa []     = []
 reversa (x:xs) = reversa xs ++ [x]
 
 zipMaximos :: [Int] -> [Int] -> [Int]
-zipMaximos []     _      = []
-zipMaximos _     []      = []
+zipMaximos []     ms      = ms
+zipMaximos ns     []      = ns
 zipMaximos (n:ns) (m:ms) = if (n >= m) 
                             then n : zipMaximos ns ms
                             else m : zipMaximos ns ms
 
 elMinimo :: Ord a => [a] -> a
 --PRECOND: En la lista dada hay un elemento y es el mínimo
-elMinimo (x:[]) = x
-elMinimo (x:xs) = if x <= (elMinimo xs)
-                    then x
-                    else elMinimo xs
-
+elMinimo []     = error "No hay elementos en la lista"
+elMinimo (x:xs) = if (null xs)
+                then x
+                else min x (elMinimo xs)
 
 {-
                         2. Recursión sobre números
@@ -211,13 +210,11 @@ edad (P n e) = e
 elMasViejo :: [Persona] -> Persona
 --PRECOND: la lista dada posee al menos una persona y es la más vieja
 elMasViejo []     = error "No hay personas en la lista"
-elMasViejo (p:ps) = elMasViejoEntreY p ps
-
-elMasViejoEntreY :: Persona -> [Persona] -> Persona
-elMasViejoEntreY pe []     = pe
-elMasViejoEntreY pe (p:ps) = if (edad pe >= edad p) 
-                            then elMasViejoEntreY pe ps
-                            else elMasViejoEntreY p ps
+elMasViejo (p:ps) = if (null ps)
+                    then p
+                    else case (edad p > edad (elMasViejo ps)) of
+                                False -> elMasViejo ps
+                                True  -> p
 
 {-
  2. Modificaremos la representación de Entrenador y Pokemon de la práctica anterior de la siguiente manera:
@@ -295,11 +292,12 @@ data Entrenador     = ConsEntrenador String [Pokemon]
 -}
 
 cuantosDeTipo_De_LeGananATodosLosDe_:: TipoDePokemon -> Entrenador -> Entrenador -> Int
-cuantosDeTipo_De_LeGananATodosLosDe_ tp e1 e2 = cuantos_De_LeGananA_ tp (pokemonsDe e1) (pokemonsDe e2)
+cuantosDeTipo_De_LeGananATodosLosDe_ tp (ConsEntrenador n1 ps1) (ConsEntrenador n2 ps2) = cuantos_De_LeGananA_ tp ps1 ps2
+
 
 cuantos_De_LeGananA_ :: TipoDePokemon -> [Pokemon] -> [Pokemon] -> Int
-cuantos_De_LeGananA_ tp []     pks = 0
-cuantos_De_LeGananA_ tp (p:ps) pks = unoSi (superaATodos p pks) + cuantos_De_LeGananA_ tp ps pks
+cuantos_De_LeGananA_ tp [] pks     = 0
+cuantos_De_LeGananA_ tp (p:ps) pks = unoSi ((esTipoIgual tp (tipoDe p)) && superaATodos p pks) + cuantos_De_LeGananA_ tp ps pks
 
 superaATodos :: Pokemon -> [Pokemon] -> Bool
 superaATodos pk []     = True
@@ -432,13 +430,11 @@ esSenior _      = False
 -----------------------------------
 
 cantQueTrabajanEn :: [Proyecto] -> Empresa -> Int
-cantQueTrabajanEn ps (ConsEmpresa r) = longitud (losQueTrabajanEn r ps)
+cantQueTrabajanEn ps (ConsEmpresa rs) = losQueTrabajanEn rs ps
 
-losQueTrabajanEn :: [Rol] -> [Proyecto] -> [Rol]
-losQueTrabajanEn [] ps     = []
-losQueTrabajanEn (r:rs) ps = if (seEncuentraEn (proyecto r) ps)
-                                then r : losQueTrabajanEn rs ps
-                                else losQueTrabajanEn rs ps
+losQueTrabajanEn :: [Rol] -> [Proyecto] -> Int
+losQueTrabajanEn [] ps     = 0
+losQueTrabajanEn (r:rs) ps = unoSi (seEncuentraEn (proyecto r) ps) + losQueTrabajanEn rs ps
 
 -----------------------------------
 

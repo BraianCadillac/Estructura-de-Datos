@@ -48,7 +48,7 @@ Dado un color y una celda, agrega una bolita de dicho color a la celda.
 
 poner :: Color -> Celda -> Celda
 poner co CeldaVacia    = Bolita co CeldaVacia
-poner co (Bolita c cl) = Bolita co (Bolita c cl)
+poner co cl = Bolita co cl
 
 {-
 sacar :: Color -> Celda -> Celda
@@ -294,9 +294,9 @@ Nota: El primer nivel de un árbol (su raíz) es 0.
 -}
 
 levelN :: Int -> Tree a -> [a]
-levelN 0 EmptyT          = []
+levelN _ EmptyT          = []
 levelN 0 (NodeT x ti td) = [x] 
-levelN n EmptyT          = []
+levelN _ EmptyT          = []
 levelN n (NodeT x ti td) = levelN (n-1) ti ++ levelN (n-1) td
 
 {-
@@ -319,9 +319,9 @@ ramaMasLarga :: Tree a -> [a]
 Devuelve los elementos de la rama más larga del árbol
 -}
 
-ramaMasLarga :: Tree a -> [a]
-ramaMasLarga EmptyT          = []
-ramaMasLarga (NodeT x ti td) = if (heightT ti > heightT td)
+ramaMasLarga :: Tree a -> [a] 
+ramaMasLarga EmptyT = [] 
+ramaMasLarga (NodeT x ti td) = if (heightT ti > heightT td) 
                                 then x : (ramaMasLarga ti) 
                                 else x : (ramaMasLarga td)
 
