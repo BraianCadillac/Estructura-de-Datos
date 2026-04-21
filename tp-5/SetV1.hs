@@ -3,25 +3,25 @@ module SetV1 (Set, emptyS, addS, belongs, sizeS, removeS, unionS, setToList) whe
 {-
 Un Set es un tipo abstracto de datos que consta de las siguientes operaciones:
 
-emptyS :: Set a
+emptyS :: Set a -- O(1)
 -PROP: Crea un conjunto vacío.
 
-addS :: Eq a => a -> Set a -> Set a
+addS :: Eq a => a -> Set a -> Set a -- O(n)
 PROP: Dados un elemento y un conjunto, agrega el elemento al conjunto.
 
-belongs :: Eq a => a -> Set a -> Bool
+belongs :: Eq a => a -> Set a -> Bool -- O(n)
 PROP: Dados un elemento y un conjunto indica si el elemento pertenece al conjunto.
 
-sizeS :: Eq a => Set a -> Int
+sizeS :: Eq a => Set a -> Int -- O(1)
 PROP: Devuelve la cantidad de elementos distintos de un conjunto.
 
-removeS :: Eq a => a -> Set a -> Set a
+removeS :: Eq a => a -> Set a -> Set a -- O(n)
 PROP: Borra un elemento del conjunto.
 
-unionS :: Eq a => Set a -> Set a -> Set a
+unionS :: Eq a => Set a -> Set a -> Set a O(n²)
 PROP: Dados dos conjuntos devuelve un conjunto con todos los elementos de ambos. conjuntos.
 
-setToList :: Eq a => Set a -> [a]
+setToList :: Eq a => Set a -> [a] -- O(1)
 PROP: Dado un conjunto devuelve una lista con todos los elementos distintos del conjunto.
 
 
