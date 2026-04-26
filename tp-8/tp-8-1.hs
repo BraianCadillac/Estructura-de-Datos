@@ -29,6 +29,15 @@ data Nave = N (Map SectorId Sector) (Map Nombre Tripulante) (MaxHeap Tripulante)
         *En mss, todos los tripulantes asignados a cada sector, se encuentran en mnt
         *En mnt, todos los sectores asignados a un tripulante, se encuentran en mss
     -}
+    {-
+    INV REPR: (N mss mnt mt) se cumple que:
+        *Para cada Tripulante en mnt para un nombre, es ese nombre
+        *Para cada Sector en mss para un SectorId, es ese SectorId
+        *Para cada Nombre n en mnt, su valor asociado Tripulante se encuentra en mt para ese mismo nombre. Y cada tripulante en mt se encuentra en mnt
+        *Para cada Tripulante en mnt, sus sectores asignados se encuentran en mss.
+        *Para cada Sector en mss, sus tripulantes se encuentran en mnt
+        *mt está ordenado por la jerarquía de los tripulantes 
+    -}
 
 {-
 Implementación

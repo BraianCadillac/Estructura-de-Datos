@@ -14,9 +14,9 @@ a) Definir los invariantes de representación en base a la estructura dada.
 data RAList a = MkR Int (Map Int a) (Heap a)
     {-
     INV.REPR: En (MkR n mia ha)
-            *n es igual a la cantidad de claves en mia
+            *n es igual a la cantidad de claves en mia, la cuál es igual a la cantidad de elementos de ha (siendo n >= 0)
             *Los valores de mia y los elementos de ha coinciden considerando multiplicidad
-            *Las claves de mia son exactamente desde 0 a (n-1)
+            *Las claves de mia son índices desde 0 hasta (n-1)
     -}
 
 
