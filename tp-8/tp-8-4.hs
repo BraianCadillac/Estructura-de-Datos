@@ -14,7 +14,7 @@ En la escuela no existen dos magos con el mismo nombre.
 data EscuelaDeMagia = EDM (Set Hechizo) (Map Nombre Mago) (PriorityQueue Mago)
     {-
     INV.REPR: En (EDM sh mnm pqm) se cumple que:
-            *Para cada nombre n en mnm, es idéntico al nombre del Mago m asociado y además m pertenece a pqm
+            *Para cada nombre n en mnm, es idéntico al nombre del Mago m asociado. Donde m asociado a n es exactamente igual al Mago que se encuentra en pqm
             *En pqm, cada Mago se encuentra en mnm
             *En pqm, la cantidad de Magos es coincidente con la cantidad de Magos en mnm
             *En pqm, no hay magos repetidos

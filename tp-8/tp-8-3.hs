@@ -150,7 +150,7 @@ sólo las operaciones que tienen cambios sustanciales y no en las que, por ejemp
 data Organizador = MkO (Map Checksum (Set Persona)) (Map Persona (Set Checksum)) (Maybe Checksum)
     {-
     INV REPR: En (MkO mcsp mpsc mc)
-            *En mc, para un (Just c), c es el programa con más autores en el organizador, Nothing sino hay programas 
+            *En mc, (Just c) c es el programa con más autores del organizador donde c se encuentra como clave en mcsp. Nothing en caso de no haber programas en el map mcsp.
     -}
 
 elMayorPrograma :: Organizador -> Maybe Checksum -- O(1)
