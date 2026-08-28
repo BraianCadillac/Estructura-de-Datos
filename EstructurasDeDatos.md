@@ -5,20 +5,20 @@
 ### En la materia se trabajaron dos modelos de programación:
 
 Haskell — Modelo denotativo / funcional
-Recursión estructural.
-Tipos algebraicos definidos por el usuario.
-Listas y árboles binarios.
-Implementación y uso de TADs (conceptos de Diseñador, rol del implementador, rol de usuario).
-Queue, Stack, Set, MultiSet, Map, Priority Queue, Heap, BST y AVL.
-Análisis de costos y complejidad temporal de las operaciones.
+- Recursión estructural.
+- Tipos algebraicos definidos por el usuario.
+- Listas y árboles binarios.
+- Implementación y uso de TADs (conceptos de Diseñador, rol del implementador, rol de usuario).
+- Queue, Stack, Set, MultiSet, Map, Priority Queue, Heap, BST y AVL.
+- Análisis de costos y complejidad temporal de las operaciones.
 
 C/C++ — Modelo imperativo
-Punteros y manejo de memoria estática, dinámica.
-Arrays.
-Implementación de TADs en el modelo imperativo (los vistos anteriormente en el modelo denotativo, más otros).
-Análisis de costos y complejidad temporal en el modelo imperativo.
+- Punteros y manejo de memoria estática, dinámica.
+- Arrays.
+- Implementación de TADs en el modelo imperativo (los vistos anteriormente en el modelo denotativo, más otros).
+- Análisis de costos y complejidad temporal en el modelo imperativo.
 
-También se trabajó la diferencia entre el rol de implementador y usuario de un TAD, utilizando sus operaciones a través de una interfaz sin depender de su representación interna.
+### También se trabajó la diferencia entre el rol de implementador y usuario de un TAD, utilizando sus operaciones a través de una interfaz sin depender de su representación interna.
 
 Universidad Nacional de Quilmes — Tecnicatura Universitaria en Programación
 Materia: Estructuras de Datos
